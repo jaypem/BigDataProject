@@ -1,0 +1,7 @@
+http://docs.tweepy.org/en/v3.4.0/install.html
+
+https://galeascience.wordpress.com/2016/03/18/collecting-twitter-data-with-python/
+
+http://tweepy.readthedocs.io/en/v3.5.0/auth_tutorial.html#oauth-authentication
+
+https://dev.to/rodolfoferro/sentiment-analysis-on-trumpss-tweets-using-python-
