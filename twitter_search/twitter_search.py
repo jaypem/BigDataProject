@@ -147,6 +147,10 @@ def main():
 
         ''' other variables '''
         name = search_phrase.split()[0]
+        if name == 'bitcoin':
+            name = 'bitcoin_s'
+        elif name == '#bitcoin':
+            name = '#bitcoin_s'
         json_file_root = name + '/'  + name
         os.makedirs(os.path.dirname(json_file_root), exist_ok=True)
         read_IDs = False
