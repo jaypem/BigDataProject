@@ -1,0 +1,63 @@
+\documentclass[
+journal=jacsat, % for undefined journal
+manuscript=article]{achemso}
+
+\newcommand*{\mycommand}[1]{\texttt{\emph{#1}}}
+
+% Bilder
+\graphicspath{{images/}}     % Ordner, aus dem die Bilder geladen werden
+\usepackage{float}
+\usepackage{graphicx} % Bilder
+\usepackage{color} % Farben
+%\DeclareGraphicsExtensions{.pdf,.png,.jpg, .gif} % bevorzuge pdf-Dateien
+\usepackage{subfig}
+
+%\captionsetup[subfigure]{margin=0pt, parskip=0pt, hangindent=0pt, indention=0pt, singlelinecheck=true,  %labelformat=parens}
+
+%\usepackage[all]{hypcap} % Beim Klicken auf Links zum Bild und nicht zu Caption gehen
+% Bildunterschrift
+%\setcapindent{0em} % kein Einruecken der Caption von Figures und Tabellen
+%\setcapwidth{0.9\textwidth}
+\setlength{\abovecaptionskip}{0.2cm} % Abstand der zwischen Bild- und Bild�berschrift
+\setlength{\belowcaptionskip}{0.2cm} % Abstand der zwischen Bild- und Bildunterschrift
+
+\usepackage[autostyle=true, english=british]{csquotes}   % Anfuehurngsstriche
+\usepackage{siunitx}
+
+\author{Alicia Hirt}
+\email{alicia.hirt@uni-jena.de}
+\author{Tristan Kreuziger}
+\email{tristan.kreuziger@uni-jena.de}
+\author{Jan-Philipp Praetorius}
+\email{jan-philipp.mueller@uni-jena.de}
+
+\affiliation[Friedrich-Schiller-Universität Jena]
+{Faculty of Mathematics and Computer Science, Friedrich-Schiller-Universität Jena, Germany}
+
+\title[Bitcoin vs. Twitter]
+{Bitcoin vs. Twitter --- Zusammenh\"ange des Bitcoin-Kurses und zeitgleicher Tweets}
+
+
+\begin{document}
+
+\section{Einf\"uhrung}
+
+Neben etablierten Wertpapieren und Indizes, lassen sich seit einiger auch digitale Zahlungsmittel an offiziellen Marktpl\"atzen und B\"orsen handeln. W\"ahrend W\"ahrungen wie der Doller einen relativ gut messbaren Wert besitzen und dieser Wert durch aktive Ma{\ss}nahmen reguliert und beeinflusst werden kann, sind Kryptow\"ahrungen weitestgehend unabh\"angig. Dabei haben digitale W\"ahrungen wie der Bitcoin eine extreme Volatilit\"at. Im Rahmen dieser Arbeit soll ermitteln werden, ob es einen Zusammenhang zwischen dem Kursverlauf des Bitcoin und der Meinung von Twitter-Nutzern \"uber den Bitcoin gibt.
+
+\newpage
+
+\section{Daten}
+\input{data}
+
+\subsection{Methode}
+\input{method}
+
+\subsection{Auswertung}
+\input{results}
+
+\subsection{Ausblick}
+
+andere Daten ...
+konsistente Daten ...
+
+\end{document}
