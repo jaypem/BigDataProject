@@ -2,7 +2,7 @@
 journal=jacsat, % for undefined journal
 manuscript=article]{achemso}
 
-\newcommand*{\mycommand}[1]{\texttt{\emph{#1}}}
+\usepackage[ngerman]{babel}
 
 % Bilder
 \graphicspath{{images/}}     % Ordner, aus dem die Bilder geladen werden
@@ -21,7 +21,7 @@ manuscript=article]{achemso}
 \setlength{\abovecaptionskip}{0.2cm} % Abstand der zwischen Bild- und Bild�berschrift
 \setlength{\belowcaptionskip}{0.2cm} % Abstand der zwischen Bild- und Bildunterschrift
 
-\usepackage[autostyle=true, english=british]{csquotes}   % Anfuehurngsstriche
+\usepackage[autostyle=true, german=quotes]{csquotes}   % Anfuehurngsstriche
 \usepackage{siunitx}
 
 \author{Alicia Hirt}
@@ -39,25 +39,26 @@ manuscript=article]{achemso}
 
 
 \begin{document}
+	
+\renewcommand{\figurename}{Abbildung}
 
 \section{Einf\"uhrung}
 
-Neben etablierten Wertpapieren und Indizes, lassen sich seit einiger auch digitale Zahlungsmittel an offiziellen Marktpl\"atzen und B\"orsen handeln. W\"ahrend W\"ahrungen wie der Doller einen relativ gut messbaren Wert besitzen und dieser Wert durch aktive Ma{\ss}nahmen reguliert und beeinflusst werden kann, sind Kryptow\"ahrungen weitestgehend unabh\"angig. Dabei haben digitale W\"ahrungen wie der Bitcoin eine extreme Volatilit\"at. Im Rahmen dieser Arbeit soll ermitteln werden, ob es einen Zusammenhang zwischen dem Kursverlauf des Bitcoin und der Meinung von Twitter-Nutzern \"uber den Bitcoin gibt.
+Neben etablierten Wertpapieren und Indizes, lassen sich seit einiger Zeit auch digitale Zahlungsmittel an offiziellen Marktpl\"atzen und B\"orsen handeln. W\"ahrend W\"ahrungen wie der Doller einen relativ gut messbaren Wert besitzen und dieser Wert durch aktive Ma{\ss}nahmen reguliert und beeinflusst werden kann, sind Kryptow\"ahrungen weitestgehend unabh\"angig. Dabei haben digitale W\"ahrungen wie der Bitcoin eine extreme Volatilit\"at. Im Rahmen dieser Arbeit soll ermitteln werden, ob es einen Zusammenhang zwischen dem Kursverlauf des Bitcoin und der Meinung von Twitter-Nutzern \"uber den Bitcoin gibt. Dazu wird eine Sentiment-Analyse von Tweets durchgef\"uhrt.
 
 \newpage
 
 \section{Daten}
 \input{data}
 
-\subsection{Methode}
+\section{Methode}
 \input{method}
 
-\subsection{Auswertung}
+\section{Auswertung}
 \input{results}
 
-\subsection{Ausblick}
+\section{Zusammenfassung und Ausblick}
+\input{ausblick}
 
-andere Daten ...
-konsistente Daten ...
 
 \end{document}
