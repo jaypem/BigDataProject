@@ -24,6 +24,19 @@ manuscript=article]{achemso}
 \usepackage[autostyle=true, german=quotes]{csquotes}   % Anfuehurngsstriche
 \usepackage{siunitx}
 
+\usepackage{listings}
+\usepackage[scaled]{beramono}
+
+\lstset{
+	language=Python,
+	showstringspaces=false,
+	formfeed=\newpage,
+	tabsize=4,
+	commentstyle=\itshape,
+	%basicstyle=\ttfamily,
+	morekeywords={models, lambda, forms}
+}
+
 \author{Alicia Hirt}
 \email{alicia.hirt@uni-jena.de}
 \author{Tristan Kreuziger}
@@ -41,6 +54,7 @@ manuscript=article]{achemso}
 \begin{document}
 	
 \renewcommand{\figurename}{Abbildung}
+\renewcommand{\lstlistingname}{Code}
 
 \section{Einf\"uhrung}
 
@@ -51,8 +65,8 @@ Neben etablierten Wertpapieren und Indizes, lassen sich seit einiger Zeit auch d
 \section{Daten}
 \input{data}
 
-\section{Methode}
-\input{method}
+%\section{Methode}
+\input{spark}
 
 \section{Auswertung}
 \input{results}

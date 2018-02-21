@@ -1,0 +1,32 @@
+\section{Umsetzung in Spark}
+Der Arbeitsfluss in Spark (siehe Code \ref{code:Spark}) besteht grob aus vier Phasen. 
+
+Die bereinigten Daten werden aus einer Textdatei direkt von Spark eingelesen und liegen dann als RDD vor. Danach folgt im ersten Schritt eine Vorverarbeitung, bei der das Datum von einem Text in ein Objekt konvertiert wird, damit der Umgang damit sp\"ater einfacher ist. Hier werden auch F\"alle herausgefiltert, bei denen die Konvertierung fehlgeschlagen ist. In einem solchen Fall hat das Mapping einen ung\"ultigen Wert zur\"uckgeliefert, der bekannt ist und dann explizit entfernt werden kann.
+
+Dann folgt der Schritt, in dem der Text des Tweets analysiert wird und die heuristisch bestimmte Stimmung zur\"uckgegeben wird. Die Typen der Tupel \"andern sich hier von (Datum, Text) zu (Datum, Float). Die Stimmungswerte liegen zwischen -1 und 1, sodass bei Fehlern in diesem Mapping-Schritt einfach ein Wert zur\"uckgegeben werden kann, der deutlich aus dem Rahmen f\"allt. Dieser wird dann wie zuvor beim Datum herausgefiltert.
+
+Im Folgenden folgt ein Mappen der Datumsangaben und Stimmungen auf diskretere Punkte. Die Zeitstempel der Tweets liegen sekundengenau vor, was f\"ur die Analyse nicht hilfreich ist. Das Ziel ist es alle Stimmungen in einem gewissen Datumsbereich, z.B. an Tag X von 18 bis 20 Uhr zusammenzufassen. Dann lassen sich die Stimmungen in diesen Zeitintervallen mit Ver\"anderungen im Bitcoin-Kurs \"uber den gleichen Zeitraum vergleichen. Je gr\"o{\ss}er die Anzahl an - einigerma{\ss}en zeitlich gleichverteilten Tweets - lie{\ss}en sich diese Intervalle immer kleiner machen, sodass eine punktuelle Betrachtung m\"oglich wird.
+
+In der Praxis kommen Stimmungen auf dem ganzen Spektrum [-1,1] vor, was wie auch bei den Zeitangaben in diesem Szenario nicht hilfreich ist. Folglich werden zu Beginn des Programmablaufs Intervalle angegeben, auf die die Stimmungen abgebildet werden. Im sp\"ater folgenden Beispiel sind das [-1.0, -0.1], [-0.1, 0.1], [0.1, 1.0]. Werte werden jetzt auf diese Intervalle diskret abgebildet und nur noch der Index des Intervalls gespeichert. Die geringe Gr\"o{\ss}e des Intervalls um 0 herum, also neutrale Stimmungen liegt daran, dass die Analyse der Stimmungen \"uberproportional stark zur Einteilung neutral tendiert, was hiermit etwas abgeschw\"acht wird.
+
+Im letzten Schritt wird f\"ur jedes Stimmungsintervall gez\"ahlt, wie oft die Stimmung an jedem Zeitpunkt vorgekommen ist. Das finale Ergebnis besteht dann aus dem Zeitstempel und der Liste der H\"aufigkeiten f\"ur jedes Intervall.
+
+\hrulefill
+\begin{lstlisting}[caption={Spark Code}, label ={code:Spark}]
+data_lines = sc.textFile(txt)
+
+prepared = data_lines.map(lambda x: split_data_line(x))
+converted = prepared.map(lambda x: convert_date(x))
+	.filter(lambda x: x[0].year != 1990)
+sentiments = converted.map(lambda x: check_sentiment(x))
+	.filter(lambda x: x[1] != 666)
+sentiments = sentiments.map(lambda x: cluster_sentiment(x, levels))
+sentiments = sentiments.map(lambda x: cluster_date(x, levels))
+
+for i in range(len(sent_levels)):
+   temp = s.filter(lambda x: x[1] == i)
+		.groupByKey()
+		.map(lambda x: (x[0], (i, len(list(x[1])) - 1)))
+   final = final.union(temp)
+
+\end{lstlisting}
